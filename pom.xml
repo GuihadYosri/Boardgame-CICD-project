@@ -100,7 +100,7 @@
 			                <execution>
 			                    <phase>validate</phase>
 			                    <goals>
-			                        <goal>check</goal>
+			                        <goal>checkstyle</goal>
 			                    </goals>
 			                </execution>
 			            </executions>
