@@ -93,18 +93,26 @@
 				</configuration>
 			</plugin>
                         <plugin>
-			            <groupId>org.apache.maven.plugins</groupId>
-			            <artifactId>maven-checkstyle-plugin</artifactId>
-			            <version>3.2.0</version>
-			            <executions>
-			                <execution>
-			                    <phase>validate</phase>
-			                    <goals>
-			                        <goal>checkstyle</goal>
-			                    </goals>
-			                </execution>
-			            </executions>
-                        </plugin>
+				    <groupId>org.apache.maven.plugins</groupId>
+				    <artifactId>maven-checkstyle-plugin</artifactId>
+				    <version>3.2.0</version>
+				    <executions>
+				        <execution>
+				            <id>validate-style</id>
+				            <phase>verify</phase>
+				            <goals>
+				                <goal>check</goal>
+				            </goals>
+				        </execution>
+				    </executions>
+				    <configuration>
+				        <configLocation>checkstyle.xml</configLocation>
+				        <encoding>UTF-8</encoding>
+				        <consoleOutput>true</consoleOutput>
+				        <failsOnError>true</failsOnError>  <!-- Change to false if you don't want to fail build -->
+				    </configuration>
+			</plugin>
+
 			<plugin>
     <groupId>org.jacoco</groupId>
     <artifactId>jacoco-maven-plugin</artifactId>
