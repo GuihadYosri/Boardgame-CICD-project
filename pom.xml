@@ -70,20 +70,7 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-<!-- NOSONAR: This dependency was removed due to compatibility issues -->
-<!--
-	        <dependency>
-		    <groupId>com.google.guava</groupId>
-		    <artifactId>guava</artifactId>
-		    <version>32.1.2-jre</version> 
-		    <scope>compile</scope>
-		</dependency>
-		<dependency> 
-			<groupId>com.google.collections</groupId> 
-			<artifactId>google-collections</artifactId> 
-			<version>1.0</version> 
-		</dependency>
--->
+
 		<dependency>
 		    <groupId>org.jacoco</groupId> 
 		    <artifactId>jacoco-maven-plugin</artifactId>
@@ -105,30 +92,7 @@
 					</excludes>
 				</configuration>
 			</plugin>
-<!-- NOSONAR: This dependency was removed due to compatibility issues -->
-<!--
-                       <plugin>
-			    <groupId>org.apache.maven.plugins</groupId>
-			    <artifactId>maven-checkstyle-plugin</artifactId>
-			    <version>3.2.0</version>
-			    <executions>
-			        <execution>
-			            <id>validate-style</id>
-			            <phase>verify</phase>
-			            <goals>
-			                <goal>check</goal>
-			            </goals>
-			        </execution>
-			    </executions>
-			    <configuration>
-			        
-			        <configLocation>${project.basedir}/src/main/resources/google_checks.xml</configLocation>
-			      
-			        <consoleOutput>true</consoleOutput>
-			        <failsOnError>true</failsOnError>
-			    </configuration>
-</plugin>
--->
+
 
 
 			<plugin>
