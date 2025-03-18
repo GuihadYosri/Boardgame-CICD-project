@@ -71,10 +71,12 @@
 			<scope>test</scope>
 		</dependency>
 	        <dependency>
-			    <groupId>com.google.guava</groupId>
-			    <artifactId>guava</artifactId>
-			    <version>30.1.1-jre</version> <!-- Change this if needed -->
-	        </dependency>
+		    <groupId>com.google.guava</groupId>
+		    <artifactId>guava</artifactId>
+		    <version>32.1.2-jre</version> <!-- Adjust to the latest compatible version -->
+		    <scope>compile</scope>
+		</dependency>
+
 
 
 		<dependency>
