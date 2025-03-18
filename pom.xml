@@ -112,9 +112,9 @@
 			        </execution>
 			    </executions>
 			    <configuration>
-			        <checkstyleVersion>8.45</checkstyleVersion>
+			        
 			        <configLocation>${project.basedir}/src/main/resources/google_checks.xml</configLocation>
-			        <encoding>UTF-8</encoding>
+			      
 			        <consoleOutput>true</consoleOutput>
 			        <failsOnError>true</failsOnError>
 			    </configuration>
