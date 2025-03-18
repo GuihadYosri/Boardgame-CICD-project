@@ -70,7 +70,7 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-/*
+<!--
 	        <dependency>
 		    <groupId>com.google.guava</groupId>
 		    <artifactId>guava</artifactId>
@@ -82,7 +82,7 @@
 			<artifactId>google-collections</artifactId> 
 			<version>1.0</version> 
 		</dependency>
-*/
+-->
 		<dependency>
 		    <groupId>org.jacoco</groupId> 
 		    <artifactId>jacoco-maven-plugin</artifactId>
@@ -104,7 +104,7 @@
 					</excludes>
 				</configuration>
 			</plugin>
-/*
+<!--
                        <plugin>
 			    <groupId>org.apache.maven.plugins</groupId>
 			    <artifactId>maven-checkstyle-plugin</artifactId>
@@ -126,7 +126,7 @@
 			        <failsOnError>true</failsOnError>
 			    </configuration>
 </plugin>
-*/
+-->
 
 
 			<plugin>
