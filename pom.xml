@@ -70,6 +70,7 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+<!-- NOSONAR: This dependency was removed due to compatibility issues -->
 <!--
 	        <dependency>
 		    <groupId>com.google.guava</groupId>
@@ -104,6 +105,7 @@
 					</excludes>
 				</configuration>
 			</plugin>
+<!-- NOSONAR: This dependency was removed due to compatibility issues -->
 <!--
                        <plugin>
 			    <groupId>org.apache.maven.plugins</groupId>
