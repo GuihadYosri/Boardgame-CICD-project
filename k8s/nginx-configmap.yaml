@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: boardgame-app-cicd
+data:
+  nginx.conf: |
+    worker_processes 1;
+    events { worker_connections 1024; }
+    http {
+      upstream boardgame-app {
+        server boardgame-app-blue-service:8080;  # Default to Blue version
+      }
+      server {
+        listen 80;
+        location / {
+          proxy_pass http://boardgame-app;
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+      }
+    }
