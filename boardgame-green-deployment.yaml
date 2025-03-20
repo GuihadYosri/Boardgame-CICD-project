@@ -2,7 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: boardgame-app-green
-  namespace: boardgame-app
+  namespace: boardgame-app-cicd
+  labels:
+    app: boardgame-app
+    version: green
 spec:
   replicas: 1
   selector:
@@ -15,11 +18,8 @@ spec:
         app: boardgame-app
         version: green
     spec:
-      imagePullSecrets:  
-        - name: docker-hub-secret
       containers:
         - name: boardgame-app
           image: docker.io/guihadyossry/boardgame-app:latest
           ports:
             - containerPort: 8080
-
