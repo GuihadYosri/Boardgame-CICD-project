@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: boardgame-app
-  namespace: boardgame-app
+  namespace: boardgame-app-cicd
 spec:
   replicas: 1
   selector:
