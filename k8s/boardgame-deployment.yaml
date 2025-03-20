@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: boardgame-app
-          image: guihadyossry/boardgame-app:IMAGE_TAG  # This is replaced dynamically
+          image: guihadyossry/boardgame-app:latest
           ports:
             - containerPort: 8080
