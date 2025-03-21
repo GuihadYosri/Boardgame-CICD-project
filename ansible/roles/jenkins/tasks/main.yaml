@@ -1,0 +1,30 @@
+---
+- name: Install Java 11 (required by Jenkins)
+  yum:
+    name: java-11-openjdk-devel
+    state: present
+
+- name: Add Jenkins repo
+  rpm_key:
+    state: present
+    key: https://pkg.jenkins.io/redhat/jenkins.io.key
+
+- name: Add Jenkins repository
+  yum_repository:
+    name: jenkins
+    description: Jenkins Stable Repo
+    baseurl: https://pkg.jenkins.io/redhat/jenkins-2.319.3-1.1/jenkins-2.319.3-1.1.el7.x86_64.rpm
+    gpgcheck: 1
+    enabled: 1
+
+- name: Install Jenkins
+  yum:
+    name: jenkins
+    state: present
+
+- name: Start Jenkins service
+  systemd:
+    name: jenkins
+    state: started
+    enabled: yes
+
