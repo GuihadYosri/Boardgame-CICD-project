@@ -1,0 +1,25 @@
+---
+- name: Ensure Docker is installed
+  package:
+    name: docker
+    state: present
+
+- name: Start Nexus container
+  docker_container:
+    name: nexus
+    image: sonatype/nexus3:latest
+    state: started
+    restart_policy: always
+    exposed_ports:
+      - "8081"
+    published_ports:
+      - "8081:8081"
+    volumes:
+      - nexus-data:/nexus-data
+
+- name: Wait for Nexus to be up and running
+  uri:
+    url: "http://localhost:8081/"
+    status_code: 200
+    timeout: 30
+    method: GET
