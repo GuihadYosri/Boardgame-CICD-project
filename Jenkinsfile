@@ -211,8 +211,8 @@ stage('Deploy Blue-Green') {
 
                 # Health check: Add a check to confirm if the deployment was successful
                 
-                kubectl rollout status deployment/boardgame-blue-deployment -n boardgame-app-cicd
-                kubectl rollout status deployment/boardgame-green-deployment -n boardgame-app-cicd
+                kubectl rollout status deployment/boardgame-app-blue -n boardgame-app-cicd --timeout=90s
+                kubectl rollout status deployment/boardgame-app-green -n boardgame-app-cicd --timeout=90s
                 '''
                 
             } catch (Exception e) {
@@ -222,8 +222,8 @@ stage('Deploy Blue-Green') {
                 export PATH=$HOME/bin:$PATH
                 export KUBECONFIG=/var/lib/jenkins/.kube/config
                 kubectl config use-context minikube
-                kubectl rollout status deployment/boardgame-blue-deployment -n boardgame-app-cicd --timeout=90s
-                kubectl rollout status deployment/boardgame-green-deployment -n boardgame-app-cicd --timeout=90s
+                kubectl rollout undo deployment/boardgame-blue-deployment -n boardgame-app-cicd
+                kubectl rollout undo deployment/boardgame-green-deployment -n boardgame-app-cicd
                 '''
                 throw e
             }
