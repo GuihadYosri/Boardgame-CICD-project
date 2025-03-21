@@ -77,7 +77,7 @@ pipeline {
                         sh '''
                         mvn sonar:sonar \
                         -Dsonar.projectKey=Boardgame \
-                        -Dsonar.projectName="BoardGameApp-CICD" 
+                        -Dsonar.projectName="BoardGameApp-CICD" \
                         -Dsonar.host.url=http://localhost:9000 \
                         -Dsonar.login=$SONAR_TOKEN
                         '''
