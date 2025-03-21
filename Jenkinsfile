@@ -219,8 +219,11 @@ stage('Deploy Blue-Green') {
                 echo "Deployment failed, rolling back..."
                 // Rollback to previous stable state
                 sh '''
-                kubectl rollout undo deployment/boardgame-blue-deployment -n boardgame-app-cicd
-                kubectl rollout undo deployment/boardgame-green-deployment -n boardgame-app-cicd
+                export PATH=$HOME/bin:$PATH
+                export KUBECONFIG=/var/lib/jenkins/.kube/config
+                kubectl config use-context minikube
+                kubectl rollout status deployment/boardgame-blue-deployment -n boardgame-app-cicd --timeout=90s
+                kubectl rollout status deployment/boardgame-green-deployment -n boardgame-app-cicd --timeout=90s
                 '''
                 throw e
             }
