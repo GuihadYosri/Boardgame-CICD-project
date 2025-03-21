@@ -267,22 +267,41 @@ stage('Deploy Blue-Green') {
 
     
 
-   post {
+post {
     success {
-        echo 'Build and Deployment Successful!'
-    }
-    failure {
-        echo 'Build Failed. Checking logs...'
-
-        // Send email or notification about failure
         emailext (
-            subject: "Build Failed: ${currentBuild.fullDisplayName}",
-            body: "The build failed. Please check the logs for more details: ${BUILD_URL}",
-            to: "guihadyosry@gmail.com"
+            subject: "✅ SUCCESS: Jenkins Build - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: """
+            ✅ *Build Succeeded!*
+            - *Project*: ${env.JOB_NAME}
+            - *Branch*: ${env.GIT_BRANCH}
+            - *Commit*: ${env.GIT_COMMIT}
+            - *Build Logs*: ${env.BUILD_URL}/console
+            """,
+            to: "guihadyosry@gmail.com",
+            recipientProviders: [[$class: 'CulpritsRecipientProvider']],
+            attachLog: true
         )
-
-       
+    }
+    
+    failure {
+        emailext (
+            subject: "❌ FAILURE: Jenkins Build - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: """
+            🔴 *Build Failed!*
+            - *Project*: ${env.JOB_NAME}
+            - *Branch*: ${env.GIT_BRANCH}
+            - *Commit*: ${env.GIT_COMMIT}
+            - *Build Logs*: ${env.BUILD_URL}/console
+            
+            🔍 Please check the logs and fix the issue.
+            """,
+            to: "guihadyosry@gmail.com",
+            recipientProviders: [[$class: 'CulpritsRecipientProvider']],
+            attachLog: true
+        )
     }
 }
+
 
 }
