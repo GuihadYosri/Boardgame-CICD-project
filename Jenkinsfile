@@ -10,7 +10,7 @@ pipeline {
         DOCKER_IMAGE = "docker.io/guihadyossry/boardgame-app"
         NEXUS_URL = "http://localhost:8081"
         NEXUS_REPO = "maven-releases"
-        SONAR_PROJECT_KEY = "BoardgameApp"
+        SONAR_PROJECT_KEY = "Boardgame"
         KUBE_NAMESPACE = "boardgame-app-cicd"
     }
 
@@ -76,7 +76,7 @@ pipeline {
                     withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_TOKEN')]) {
                         sh '''
                         mvn sonar:sonar \
-                        -Dsonar.projectKey=BoardgameApp \
+                        -Dsonar.projectKey=Boardgame \
                         -Dsonar.host.url=http://localhost:9000 \
                         -Dsonar.login=$SONAR_TOKEN
                         '''
