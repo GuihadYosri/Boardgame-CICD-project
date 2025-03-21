@@ -1,0 +1,20 @@
+---
+- name: Install required dependencies for Minikube
+  yum:
+    name:
+      - wget
+      - conntrack
+      - socat
+      - docker
+    state: present
+
+- name: Download Minikube
+  get_url:
+    url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    dest: /usr/local/bin/minikube
+    mode: '0755'
+
+- name: Start Minikube
+  command: minikube start
+  become: yes
+
