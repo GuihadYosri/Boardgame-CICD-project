@@ -186,10 +186,12 @@ pipeline {
                 }
             }
         }
-        stage('Deploy Blue-Green') {
-            steps {
-                script {
-                    sh '''
+
+stage('Deploy Blue-Green') {
+    steps {
+        script {
+            try {
+               sh '''
                     export PATH=$HOME/bin:$PATH
                     export KUBECONFIG=/var/lib/jenkins/.kube/config
                     kubectl config use-context minikube
@@ -205,10 +207,26 @@ pipeline {
                     kubectl apply --validate=false -f k8s/nginx-configmap.yaml
                     kubectl apply --validate=false -f k8s/nginx-deployment.yaml
                     kubectl apply --validate=false -f k8s/nginx-service.yaml
-                    '''
-                }
+                
+
+                # Health check: Add a check to confirm if the deployment was successful
+                
+                kubectl rollout status deployment/boardgame-blue-deployment -n boardgame-app-cicd
+                kubectl rollout status deployment/boardgame-green-deployment -n boardgame-app-cicd
+                '''
+                
+            } catch (Exception e) {
+                echo "Deployment failed, rolling back..."
+                // Rollback to previous stable state
+                sh '''
+                kubectl rollout undo deployment/boardgame-blue-deployment -n boardgame-app-cicd
+                kubectl rollout undo deployment/boardgame-green-deployment -n boardgame-app-cicd
+                '''
+                throw e
             }
         }
+    }
+}
 
       
       stage('Switch Traffic') {
@@ -246,12 +264,22 @@ pipeline {
 
     
 
-    post {
-        success {
-            echo 'Build and Deployment Successful!'
-        }
-        failure {
-            echo 'Build Failed. Check logs!'
-        }
+   post {
+    success {
+        echo 'Build and Deployment Successful!'
     }
+    failure {
+        echo 'Build Failed. Checking logs...'
+
+        // Send email or notification about failure
+        emailext (
+            subject: "Build Failed: ${currentBuild.fullDisplayName}",
+            body: "The build failed. Please check the logs for more details: ${BUILD_URL}",
+            to: "guihadyosry@gmail.com"
+        )
+
+       
+    }
+}
+
 }
