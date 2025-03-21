@@ -1,0 +1,21 @@
+---
+- name: Setup CI/CD infrastructure on localhost
+  hosts: localhost
+  become: yes
+  gather_facts: yes
+  tasks:
+    - name: Install Jenkins
+      include_role:
+        name: jenkins
+
+    - name: Install Nexus
+      include_role:
+        name: nexus
+
+    - name: Install SonarQube
+      include_role:
+        name: sonarqube
+
+    - name: Install Minikube
+      include_role:
+        name: minikube
