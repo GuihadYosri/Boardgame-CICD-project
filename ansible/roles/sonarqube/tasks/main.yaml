@@ -1,0 +1,28 @@
+---
+- name: Ensure Docker is installed
+  package:
+    name: docker
+    state: present
+
+- name: Start SonarQube container
+  docker_container:
+    name: sonarqube
+    image: sonarqube:latest
+    state: started
+    restart_policy: always
+    exposed_ports:
+      - "9000"
+    published_ports:
+      - "9000:9000"
+    volumes:
+      - sonar-data:/opt/sonarqube/data
+      - sonar-logs:/opt/sonarqube/logs
+      - sonar-extensions:/opt/sonarqube/extensions
+
+- name: Wait for SonarQube to be up and running
+  uri:
+    url: "http://localhost:9000/"
+    status_code: 200
+    timeout: 30
+    method: GET
+
