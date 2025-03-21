@@ -139,7 +139,7 @@ pipeline {
         script {
             def scanStatus = sh(script: 'trivy image --scanners vuln --timeout 15m --cache-dir /tmp/.cache/trivy --exit-code 1 --severity CRITICAL --no-progress $DOCKER_IMAGE', returnStatus: true)
             if (scanStatus != 0) {
-                input message: 'Trivy scan found vulnerabilities. Do you want to proceed?', ok: 'Proceed'
+                input id: 'Trivy Scan Result', message: 'Trivy scan found vulnerabilities. Do you want to proceed?', ok: 'Proceed'
             }
         }
     }
