@@ -143,13 +143,11 @@ pipeline {
             }
         }
 
-stage('Manual Approval') {
-    steps {
-        script {
-            waitForInput(message: 'Trivy scan found vulnerabilities. Do you want to proceed?', ok: 'Proceed')
-        }
-    }
-}    
+         stage('Manual Approval') {
+            steps {
+                input message: 'Trivy scan found vulnerabilities. Do you want to proceed?', ok: 'Proceed'
+            }
+         }
         stage('Push Docker Image') {
             steps {
                 script {
