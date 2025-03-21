@@ -135,19 +135,18 @@ pipeline {
         }
         
        stage('Trivy Scan') {
-            steps {
-                script {
-                    // Run the Trivy scan for vulnerabilities
-                    sh 'trivy image --scanners vuln --timeout 15m --cache-dir /tmp/.cache/trivy --exit-code 0 --severity CRITICAL --no-progress $DOCKER_IMAGE '
-                }
-            }
-        }
-
-         stage('Manual Approval') {
-            steps {
+    steps {
+        script {
+            def scanStatus = sh(script: 'trivy image --scanners vuln --timeout 15m --cache-dir /tmp/.cache/trivy --exit-code 1 --severity CRITICAL --no-progress $DOCKER_IMAGE', returnStatus: true)
+            if (scanStatus != 0) {
                 input message: 'Trivy scan found vulnerabilities. Do you want to proceed?', ok: 'Proceed'
             }
-         }
+        }
+    }
+}
+
+
+         
         stage('Push Docker Image') {
             steps {
                 script {
@@ -163,17 +162,11 @@ pipeline {
             }
         }
         // Manual approval before deploying (Continuous Delivery)
-       stage('Trivy Scan') {
-    steps {
-        script {
-            def scanStatus = sh(script: 'trivy image --scanners vuln --timeout 15m --cache-dir /tmp/.cache/trivy --exit-code 1 --severity CRITICAL --no-progress $DOCKER_IMAGE', returnStatus: true)
-            if (scanStatus != 0) {
-                input message: 'Trivy scan found vulnerabilities. Do you want to proceed?', ok: 'Proceed'
+        stage('Approval Required Before Deployment') {
+            steps {
+                input message: 'Proceed with deployment to Minikube?', ok: 'Deploy'
             }
         }
-    }
-}
-
         
         stage('Deploy to Minikube') {
             steps {
