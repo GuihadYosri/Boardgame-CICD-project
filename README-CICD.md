@@ -167,7 +167,7 @@ Now, every **git push** to the repository will automatically trigger the Jenkins
 
 ## **📧 Notifications & Monitoring**  
 ✅ **Jenkins Email Notifications** - Sends build success/failure alerts.  
-✅ **Prometheus & Grafana** - Monitors Jenkins and Kubernetes cluster metrics.  
+✅ **Prometheus & Grafana** - Monitors Jenkins and Kubernetes cluster metrics.  ( installation steps provided in another readme file : README-PROMETHEUS.MD )
 ✅ **Trivy Reports** - Provides security vulnerability reports for Docker images.  
 
 ## **📌 How to Use**  
