@@ -52,5 +52,5 @@ This web application displays lists of board games and their reviews. While anyo
   - username: daffy   |     password: duck  (manager role)
 5. You can also sign-up as a new user and customize your role to play with the application! 😊
 #testtttttttttwebhook
-#test-bad-checkinnnnnnnn(rollback will show reason after commit)
+#test-bad-checkinnnnnnnn
 #test-rollback
