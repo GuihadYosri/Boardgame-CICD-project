@@ -25,7 +25,7 @@ import com.javaproject.database.DatabaseAccess;
 
 @Controller
 public class HomeController {
-test bad check in
+
     @Autowired
     DatabaseAccess da;
 
