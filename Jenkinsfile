@@ -5,7 +5,7 @@ pipeline {
         maven 'maven3'
         jdk 'jdk17'
     }
-
+ 
     environment {
         DOCKER_IMAGE = "docker.io/guihadyossry/boardgame-app"
         NEXUS_URL = "http://localhost:8081"
