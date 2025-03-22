@@ -222,8 +222,8 @@ stage('Deploy Blue-Green') {
                 export PATH=$HOME/bin:$PATH
                 export KUBECONFIG=/var/lib/jenkins/.kube/config
                 kubectl config use-context minikube
-                kubectl rollout undo deployment/boardgame-blue-deployment -n boardgame-app-cicd
-                kubectl rollout undo deployment/boardgame-green-deployment -n boardgame-app-cicd
+                kubectl rollout undo deployment/boardgame-app-blue -n boardgame-app-cicd
+                kubectl rollout undo deployment/boardgame-app-green -n boardgame-app-cicd
                 '''
                 throw e
             }
