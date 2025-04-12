@@ -20,6 +20,6 @@ spec:
     spec:
       containers:
         - name: boardgame-app
-          image: docker.io/guihadyossry/boardgame-app:non-existent
+          image: docker.io/guihadyossry/boardgame-app:latest
           ports:
             - containerPort: 8080
