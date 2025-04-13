@@ -180,7 +180,7 @@ pipeline {
                     kubectl apply --validate=false -f k8s/namespace.yaml
                     kubectl apply --validate=false -f k8s/boardgame-deployment.yaml
                     kubectl apply --validate=false -f k8s/boardgame-service.yaml
-                    // kubectl apply --validate=false -f k8s/service-monitor.yaml
+                
                   
                     '''
                 }
